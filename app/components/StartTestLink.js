@@ -1,32 +1,16 @@
 import React, { Component } from 'react';
-import { remote } from 'electron';
-import { readFileSync } from 'fs';
-import * as glosorActions from '../actions/glosorActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import * as testGlosorActions from '../actions/testGlosorActions';
 
 class StartTestLink extends Component {
-  loadData() {
-    console.log("Inside load link");
-    let file = remote.dialog.showOpenDialog();
-
-    if (file) {
-      console.log("File path:", file);
-      var fs = require('fs');
-      let data;
-      try {
-        data = readFileSync(file[0]);
-        this.props.replaceState(JSON.parse(data));
-      }
-      catch(e) { console.log(e); alert('Failed to load the file !'); }
-    }
-
+  startTest() {
+    this.props.startGlosorTest(this.props.glosor);
   }
 
   render() {
     return (
-      <a href="#" onClick={() => this.startTest()}>{this.props.children}</a>
+      <a href="#startTestLink" onClick={() => this.startTest()}>{this.props.children}</a>
     );
   }
 }
@@ -38,7 +22,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(glosorActions, dispatch);
+  return bindActionCreators(testGlosorActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartTestLink);
