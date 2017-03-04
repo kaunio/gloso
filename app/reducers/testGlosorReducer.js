@@ -1,5 +1,5 @@
 import { List } from 'immutable';
-import { START_GLOSOR_TEST } from '../actions/testGlosorActions';
+import { START_GLOSOR_TEST, TEST_GLOSA_ANSWERED_CORRECT } from '../actions/testGlosorActions';
 import TestGlosa from '../data/TestGlosa';
 import shuffle from '../utils/shuffle';
 
@@ -15,7 +15,7 @@ function createTestglosor(gList) {
   let tglistLeft = gList.map((m) => toTestglosa(m, false));
   let tglistRight = gList.map((m) => toTestglosa(m, true));
 
-  return tglistLeft.concat(tglistRight);
+  return List(tglistLeft.concat(tglistRight));
 }
 
 export default function glosor(state = defaultState, action) {
@@ -26,7 +26,13 @@ export default function glosor(state = defaultState, action) {
 
       return {
         ...state,
-        glosor: testglosor };
+        glosor: testglosor
+      };
+    case TEST_GLOSA_ANSWERED_CORRECT:
+      return {
+        ...state,
+        glosor: state.glosor.rest()
+      };
     default:
       return state;
   }

@@ -9,9 +9,9 @@ class TestView extends Component {
   render() {
     const { glosor, base } = this.props;
 
-
-    if (glosor.length > 0) {
-      return (<InputAnswerView lang1={base.lang1} lang2={base.lang2} glosa={glosor[0]} />)
+    console.log(glosor.get(0));
+    if (glosor.size > 0) {
+      return (<InputAnswerView lang1={base.lang1} lang2={base.lang2} glosa={glosor.get(0)} />)
     }
 
     return (

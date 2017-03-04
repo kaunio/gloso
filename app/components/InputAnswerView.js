@@ -1,7 +1,12 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
+import { bindActionCreators } from 'redux';
+import * as testGlosorActions from '../actions/testGlosorActions';
 
-export default class InputAnswerView extends Component {
+
+class InputAnswerView extends Component {
   static propTypes = {
     glosa: PropTypes.any.isRequired,
     lang1: PropTypes.string.isRequired,
@@ -66,7 +71,8 @@ export default class InputAnswerView extends Component {
     if (glosaAnswer === answer) {
       // Answer was right
       console.log("Righty");
-      this.setState({ ...this.state, showIncorrect: false });
+      this.setState({showIncorrect: false });
+      this.props.testGlosaAnsweredCorrect(this.props.glosa);
     } else {
       // Answer was wrong
       console.log("Falsy");
@@ -95,3 +101,15 @@ export default class InputAnswerView extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(testGlosorActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(InputAnswerView));
