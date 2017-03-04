@@ -1,0 +1,33 @@
+// @flow
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Home from '../components/Home';
+import InputAnswerView from '../components/InputAnswerView';
+import { Link } from 'react-router';
+
+class TestView extends Component {
+  render() {
+    const { glosor, base } = this.props;
+
+
+    if (glosor.length > 0) {
+      return (<InputAnswerView lang1={base.lang1} lang2={base.lang2} glosa={glosor[0]} />)
+    }
+
+    return (
+      <div>
+        Test complete
+        <Link to="/">Back to main</Link>
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    glosor: state.testGlosor.glosor,
+    base: state.glosor
+  };
+}
+
+export default connect(mapStateToProps)(TestView);
