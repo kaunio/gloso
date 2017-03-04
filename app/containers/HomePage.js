@@ -1,11 +1,20 @@
 // @flow
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Home from '../components/Home';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   render() {
     return (
-      <Home />
+      <Home saveData={this.props.saveData} />
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    saveData: state.glosor
+  };
+}
+
+export default connect(mapStateToProps)(HomePage);
