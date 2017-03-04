@@ -19,7 +19,7 @@ export default class Save extends Component {
 
   render() {
     return (
-      <span onClick={() => this.saveData()}>{this.props.children}</span>
+      <a href="#" onClick={() => this.saveData()}>{this.props.children}</a>
     );
   }
 }

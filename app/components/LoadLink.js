@@ -26,7 +26,7 @@ class LoadLink extends Component {
 
   render() {
     return (
-      <span onClick={() => this.loadData()}>{this.props.children}</span>
+      <a href="#" onClick={() => this.loadData()}>{this.props.children}</a>
     );
   }
 }
