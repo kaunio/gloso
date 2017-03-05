@@ -7,6 +7,7 @@ export default class TestGlosa {
     this.requiredAttempts = requiredAttempts;
     this.leftSide = leftSide;
     this.streak = 0;
+    this.correctStreak = 0;
 
     this.glosa = glosa;
   }

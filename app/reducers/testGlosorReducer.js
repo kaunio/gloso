@@ -26,9 +26,11 @@ function testGlosaAnswered(state, answer) {
     glosa.glosa.g1;
 
 
-  if (glosaAnswer === answer) {
+  if (glosaAnswer.toLocaleLowerCase() === answer.toLocaleLowerCase()) {
     let newGlosa = { ...glosa,
-        attempts: glosa.attempts + 1
+        attempts: glosa.attempts + 1,
+        streak: 0,
+        correctStreak: glosa.correctStreak + 1
       };
 
     let newGlosor = state.glosor.set(0, newGlosa);
@@ -39,7 +41,8 @@ function testGlosaAnswered(state, answer) {
   } else {
     let newGlosa = { ...glosa,
         attempts: glosa.attempts + 1,
-        streak: glosa.streak + 1
+        streak: glosa.streak + 1,
+        correctStreak: 0
       };
 
     let newGlosor = state.glosor.set(0, newGlosa);
@@ -73,13 +76,15 @@ export default function glosor(state = defaultState, action) {
       return testGlosaAnswered(state, action.answer);
     case TEST_NEXT_QUESTION:
       let glosor = state.glosor;
-      if (state.mode !== "failed") {
+      let glosa = state.glosor.get(0);
+      if (glosa.correctStreak >= glosa.requiredAttempts) {
         glosor = state.glosor.rest();
       }
+      glosor = List(shuffle(glosor.toArray()));
 
       return {
         ...state,
-        glosor: state.glosor.rest(),
+        glosor: glosor,
         mode: 'input'
       };
 
