@@ -15,7 +15,6 @@ class InputAnswerView extends Component {
 
   constructor(props) {
     super(props);
-    console.log("Init running");
     this.state = {
       answer: '',
       showIncorrect: false
@@ -67,7 +66,6 @@ class InputAnswerView extends Component {
 
   render() {
     const glosa = this.props.glosa;
-    console.log(glosa);
     const l1 = this.createSection(this.props.lang1, glosa.glosa.g1, glosa.leftSide);
     const l2 = this.createSection(this.props.lang2, glosa.glosa.g2, !glosa.leftSide);
 

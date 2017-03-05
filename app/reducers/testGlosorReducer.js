@@ -26,22 +26,32 @@ function testGlosaAnswered(state, answer) {
     glosa.glosa.g1;
 
 
-    if (glosaAnswer === answer) {
-      let newGlosa = { ...glosa,
-          attempts: glosa.attempts + 1,
-          streak: glosa.streak + 1
-        };
+  if (glosaAnswer === answer) {
+    let newGlosa = { ...glosa,
+        attempts: glosa.attempts + 1
+      };
 
-      let newGlosor = state.glosor.set(0, newGlosa);
+    let newGlosor = state.glosor.set(0, newGlosa);
 
-      return { ...state,
-          glosor: newGlosor,
-          mode: "correct"};
-    } else {
-      // Answer was wrong
-      return { ...state,
-          "mode": "incorrect"};
-    }
+    return { ...state,
+        glosor: newGlosor,
+        mode: "correct"};
+  } else {
+    let newGlosa = { ...glosa,
+        attempts: glosa.attempts + 1,
+        streak: glosa.streak + 1
+      };
+
+    let newGlosor = state.glosor.set(0, newGlosa);
+    const mode = newGlosa.attempts >= newGlosa.requiredAttempts ?
+      "failed" :
+      "incorrect";
+
+    // Answer was wrong
+    return { ...state,
+      glosor: newGlosor,
+      mode };
+  }
 }
 
 export default function glosor(state = defaultState, action) {
