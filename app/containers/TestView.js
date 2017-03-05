@@ -8,11 +8,11 @@ import { withRouter } from 'react-router';
 
 class TestView extends Component {
   render() {
-    const { glosor, base } = this.props;
+    const { glosor, base, testGlosor } = this.props;
 
     console.log(glosor.get(0));
     if (glosor.size > 0) {
-      return (<InputAnswerView lang1={base.lang1} lang2={base.lang2} glosa={glosor.get(0)} />)
+      return (<InputAnswerView lang1={base.lang1} lang2={base.lang2} glosa={glosor.get(0)} mode={testGlosor.mode}/>)
     }
 
     return (
@@ -33,7 +33,8 @@ class TestView extends Component {
 function mapStateToProps(state) {
   return {
     glosor: state.testGlosor.glosor,
-    base: state.glosor
+    base: state.glosor,
+    testGlosor: state.testGlosor
   };
 }
 

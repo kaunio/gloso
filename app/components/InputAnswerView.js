@@ -61,32 +61,17 @@ class InputAnswerView extends Component {
       return;
     }
 
-    const answer = this.state.answer;
-    const glosa = this.props.glosa;
-
-    const glosaAnswer = glosa.leftSide ?
-      glosa.glosa.g2 :
-      glosa.glosa.g1;
-
-    if (glosaAnswer === answer) {
-      // Answer was right
-      console.log("Righty");
-      this.setState({showIncorrect: false });
-      this.props.testGlosaAnsweredCorrect(this.props.glosa);
-    } else {
-      // Answer was wrong
-      console.log("Falsy");
-      this.setState({ ...this.state, showIncorrect: true, answer: '' });
-    }
+    this.props.testGlosaAnswered(this.props.glosa, this.state.answer);
   }
 
 
   render() {
     const glosa = this.props.glosa;
+    console.log(glosa);
     const l1 = this.createSection(this.props.lang1, glosa.glosa.g1, glosa.leftSide);
     const l2 = this.createSection(this.props.lang2, glosa.glosa.g2, !glosa.leftSide);
 
-    let errorSection = this.state.showIncorrect ?
+    let errorSection = this.props.mode === 'incorrect' ?
       <div>That was not the right answer!</div> :
       null;
 
