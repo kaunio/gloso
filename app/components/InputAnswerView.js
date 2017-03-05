@@ -71,11 +71,11 @@ class InputAnswerView extends Component {
 
   render() {
     const mode = this.props.mode;
-    const failed = mode === "failed";
+    const readOnly = mode === "failed" || mode === "correct";
 
     const glosa = this.props.glosa;
-    const l1 = this.createSection(this.props.lang1, glosa.glosa.g1, failed || glosa.leftSide);
-    const l2 = this.createSection(this.props.lang2, glosa.glosa.g2, failed || !glosa.leftSide);
+    const l1 = this.createSection(this.props.lang1, glosa.glosa.g1, readOnly || glosa.leftSide);
+    const l2 = this.createSection(this.props.lang2, glosa.glosa.g2, readOnly || !glosa.leftSide);
 
     let errorSection;
 

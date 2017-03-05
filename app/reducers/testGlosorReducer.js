@@ -58,7 +58,7 @@ export default function glosor(state = defaultState, action) {
   switch (action.type) {
     case START_GLOSOR_TEST:
       let testglosor = createTestglosor(action.glosor);
-      testglosor = shuffle(testglosor);
+      testglosor = List(shuffle(testglosor.toArray()));
 
       return {
         ...state,
