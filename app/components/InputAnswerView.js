@@ -63,15 +63,27 @@ class InputAnswerView extends Component {
     this.props.testGlosaAnswered(this.props.glosa, this.state.answer);
   }
 
+  nextQuestion = () => {
+    this.setState({answer: ''});
+    this.props.testNextQuestion();
+  }
+
 
   render() {
-    const glosa = this.props.glosa;
-    const l1 = this.createSection(this.props.lang1, glosa.glosa.g1, glosa.leftSide);
-    const l2 = this.createSection(this.props.lang2, glosa.glosa.g2, !glosa.leftSide);
+    const mode = this.props.mode;
+    const failed = mode === "failed";
 
-    let errorSection = this.props.mode === 'incorrect' ?
-      <div>That was not the right answer!</div> :
-      null;
+    const glosa = this.props.glosa;
+    const l1 = this.createSection(this.props.lang1, glosa.glosa.g1, failed || glosa.leftSide);
+    const l2 = this.createSection(this.props.lang2, glosa.glosa.g2, failed || !glosa.leftSide);
+
+    let errorSection;
+
+    if(mode === 'incorrect') {
+      errorSection = <div>That was not the right answer!</div>;
+    } else if (mode === 'failed' || mode === 'correct') {
+      errorSection = <button type="button" onClick={this.nextQuestion}>Next question</button>;
+    }
 
     return (
       <div>

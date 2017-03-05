@@ -1,5 +1,5 @@
 import { List } from 'immutable';
-import { START_GLOSOR_TEST, TEST_GLOSA_ANSWERED_CORRECT, TEST_GLOSA_ANSWERED } from '../actions/testGlosorActions';
+import { START_GLOSOR_TEST, TEST_GLOSA_ANSWERED_CORRECT, TEST_GLOSA_ANSWERED, TEST_NEXT_QUESTION } from '../actions/testGlosorActions';
 import TestGlosa from '../data/TestGlosa';
 import shuffle from '../utils/shuffle';
 
@@ -43,7 +43,7 @@ function testGlosaAnswered(state, answer) {
       };
 
     let newGlosor = state.glosor.set(0, newGlosa);
-    const mode = newGlosa.attempts >= newGlosa.requiredAttempts ?
+    const mode = newGlosa.streak >= newGlosa.requiredAttempts ?
       "failed" :
       "incorrect";
 
@@ -71,6 +71,18 @@ export default function glosor(state = defaultState, action) {
       };
     case TEST_GLOSA_ANSWERED:
       return testGlosaAnswered(state, action.answer);
+    case TEST_NEXT_QUESTION:
+      let glosor = state.glosor;
+      if (state.mode !== "failed") {
+        glosor = state.glosor.rest();
+      }
+
+      return {
+        ...state,
+        glosor: state.glosor.rest(),
+        mode: 'input'
+      };
+
     default:
       return state;
   }
