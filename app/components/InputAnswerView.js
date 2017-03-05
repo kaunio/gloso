@@ -57,7 +57,7 @@ class InputAnswerView extends Component {
   handleAnswer = (event) => {
     const shouldProcess = event.charCode === 13;
 
-    if (!shouldProcess) {
+    if (!shouldProcess || !this.state.answer) {
       return;
     }
 
@@ -84,7 +84,7 @@ class InputAnswerView extends Component {
   render() {
     const glosa = this.props.glosa;
     const l1 = this.createSection(this.props.lang1, glosa.glosa.g1, glosa.leftSide);
-    const l2 = this.createSection(this.props.lang2, glosa.glosa.g1, !glosa.leftSide);
+    const l2 = this.createSection(this.props.lang2, glosa.glosa.g2, !glosa.leftSide);
 
     let errorSection = this.state.showIncorrect ?
       <div>That was not the right answer!</div> :
