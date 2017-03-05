@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux';
 import * as testGlosorActions from '../actions/testGlosorActions';
+import styles from './InputAnswerView.css';
 
 
 class InputAnswerView extends Component {
@@ -28,7 +29,7 @@ class InputAnswerView extends Component {
            <div>
              {lang}
            </div>
-           <div>
+           <div className={styles.glosa}>
              {text}
            </div>
          </div>
@@ -86,7 +87,7 @@ class InputAnswerView extends Component {
     }
 
     return (
-      <div>
+      <div className={styles.container}>
         <form>
           {l1}
           {l2}
