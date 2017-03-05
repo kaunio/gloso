@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Home from '../components/Home';
 import InputAnswerView from '../components/InputAnswerView';
 import { Link } from 'react-router';
+import { withRouter } from 'react-router';
 
 class TestView extends Component {
   render() {
@@ -21,6 +22,12 @@ class TestView extends Component {
       </div>
     );
   }
+
+  componentWillMount() {
+    if (this.props.base.glosor.size === 0) {
+        this.props.router.push("/");
+    }
+  }
 }
 
 function mapStateToProps(state) {
@@ -30,4 +37,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TestView);
+export default connect(mapStateToProps)(withRouter(TestView));

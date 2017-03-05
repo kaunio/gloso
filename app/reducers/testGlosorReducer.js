@@ -4,7 +4,8 @@ import TestGlosa from '../data/TestGlosa';
 import shuffle from '../utils/shuffle';
 
 const defaultState = {
-  glosor: List()
+  glosor: List(),
+  mode: 'input'
 };
 
 function toTestglosa(glosa, leftside) {
