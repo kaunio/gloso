@@ -80,12 +80,15 @@ export default function glosor(state = defaultState, action) {
       let glosa = state.glosor.get(0);
       if (glosa.correctStreak >= glosa.requiredAttempts) {
         glosor = state.glosor.rest();
+      } else {
+        glosa = {...glosa, streak: 0};
+        glosor = state.glosor.set(0, glosa);
       }
       glosor = List(shuffle(glosor.toArray()));
 
       return {
         ...state,
-        glosor: glosor,
+        glosor,
         mode: 'input'
       };
 
