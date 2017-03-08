@@ -1,4 +1,4 @@
-//Borrowed from http://stackoverflow.com/a/6274398
+// Borrowed from http://stackoverflow.com/a/6274398
 export default function shuffle(array) {
   let counter = array.length;
 
