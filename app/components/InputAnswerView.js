@@ -82,8 +82,10 @@ class InputAnswerView extends Component {
 
     if(mode === 'incorrect') {
       errorSection = <div>That was not the right answer!</div>;
-    } else if (mode === 'failed' || mode === 'correct') {
-      errorSection = <button type="button" onClick={this.nextQuestion}>Next question</button>;
+    } else if (mode === 'failed') {
+      errorSection = (<div>Sorry :(!<br/><button type="button" onClick={this.nextQuestion}>Next question</button></div>);
+    } else if (mode === 'correct') {
+      errorSection = (<div>Correct!<br/><button type="button" onClick={this.nextQuestion}>Next question</button></div>);
     }
 
     return (

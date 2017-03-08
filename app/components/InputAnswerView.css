@@ -1,0 +1,16 @@
+.container div,input,button {
+    font-size: 24pt;
+}
+
+.container input {
+    width: 80%;
+}
+
+.glosa {
+    font-weight: bold;
+
+}
+
+input {
+    width: 80%;
+}

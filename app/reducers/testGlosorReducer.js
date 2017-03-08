@@ -5,7 +5,9 @@ import shuffle from '../utils/shuffle';
 
 const defaultState = {
   glosor: List(),
-  mode: 'input'
+  mode: 'input',
+  correctAnswers: 0,
+  incorrectAnswers: 0
 };
 
 function toTestglosa(glosa, leftside) {
@@ -37,7 +39,9 @@ function testGlosaAnswered(state, answer) {
 
     return { ...state,
         glosor: newGlosor,
-        mode: "correct"};
+        mode: "correct",
+        correctAnswers: state.correctAnswers + 1
+      };
   } else {
     let newGlosa = { ...glosa,
         attempts: glosa.attempts + 1,
@@ -53,7 +57,9 @@ function testGlosaAnswered(state, answer) {
     // Answer was wrong
     return { ...state,
       glosor: newGlosor,
-      mode };
+      mode,
+      incorrectAnswers: state.incorrectAnswers + 1
+      };
   }
 }
 
@@ -66,11 +72,6 @@ export default function glosor(state = defaultState, action) {
       return {
         ...state,
         glosor: testglosor
-      };
-    case TEST_GLOSA_ANSWERED_CORRECT:
-      return {
-        ...state,
-        glosor: state.glosor.rest()
       };
     case TEST_GLOSA_ANSWERED:
       return testGlosaAnswered(state, action.answer);
