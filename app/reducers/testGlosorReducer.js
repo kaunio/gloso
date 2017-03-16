@@ -3,13 +3,6 @@ import { START_GLOSOR_TEST, TEST_GLOSA_ANSWERED_CORRECT, TEST_GLOSA_ANSWERED, TE
 import TestGlosa from '../data/TestGlosa';
 import shuffle from '../utils/shuffle';
 
-const defaultState = {
-  glosor: List(),
-  mode: 'input',
-  correctAnswers: 0,
-  incorrectAnswers: 0
-};
-
 function toTestglosa(glosa, leftside) {
   return new TestGlosa(glosa, 3, leftside);
 }
@@ -62,6 +55,13 @@ function testGlosaAnswered(state, answer) {
       };
   }
 }
+
+const defaultState = {
+  glosor: List(),
+  mode: 'input',
+  correctAnswers: 0,
+  incorrectAnswers: 0
+};
 
 export default function glosor(state = defaultState, action) {
   switch (action.type) {
